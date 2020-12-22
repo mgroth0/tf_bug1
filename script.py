@@ -31,13 +31,15 @@ def preprocess(file):
     imdata -= 1.
     return imdata, class_map[os.path.dirname(file)]
 
-train_data = [f'data/Training/{x}' for x in os.listdir('data/Training')]
-test_data = [f'data/Testing/{x}' for x in os.listdir('data/Testing')]
+
+train_data = [f'data/Training/cat/{x}' for x in os.listdir('data/Training/cat')] + [f'data/Training/dog/{x}' for x in os.listdir('data/Training/dog')]
+test_data = [f'data/Testing/cat/{x}' for x in os.listdir('data/Testing/cat')] + [f'data/Testing/dog/{x}' for x in os.listdir('data/Testing/dog')]
 
 def get_gen(data):
     def gen():
         pairs = []
         i = 0
+        data.shuffle()
         for im_file in data:
             i += 1
             if i <= BATCH_SIZE:
