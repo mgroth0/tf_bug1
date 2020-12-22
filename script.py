@@ -3,6 +3,7 @@ import os
 import matplotlib.image as mpimg
 import cv2
 import tensorflow as tf
+tf.enable_eager_execution()
 HEIGHT_WIDTH = 299
 BATCH_SIZE = 10
 VERBOSE = 2
@@ -25,8 +26,8 @@ print_output = True
 def utility_metric(y_true, y_pred):
     global print_output
     if print_output:
-        print(f'y_true:{y_true.numpy()}')
-        print(f'y_pred:{y_pred.numpy()}')
+        print(f'y_true:{y_true.to_numpy()}')
+        print(f'y_pred:{y_pred.to_numpy()}')
         print_output = False
     return 0
 
