@@ -7,7 +7,7 @@ HEIGHT_WIDTH = 299
 BATCH_SIZE = 10
 VERBOSE = 2
 
-SANITY_SWITCH = True
+SANITY_SWITCH = False
 
 print('starting script')
 
@@ -25,8 +25,8 @@ print_output = True
 def utility_metric(y_true, y_pred):
     global print_output
     if print_output:
-        print(f'y_true:{y_true}')
-        print(f'y_pred:{y_pred}')
+        print(f'y_true:{y_true.numpy()}')
+        print(f'y_pred:{y_pred.numpy()}')
         print_output = False
     return 0
 
