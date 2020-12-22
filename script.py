@@ -7,7 +7,7 @@ HEIGHT_WIDTH = 299
 BATCH_SIZE = 10
 VERBOSE = 2
 
-SANITY_SWITCH = False
+SANITY_SWITCH = True
 
 print('starting script')
 
