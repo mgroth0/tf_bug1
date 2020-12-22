@@ -3,7 +3,7 @@ import os
 import matplotlib.image as mpimg
 import cv2
 import tensorflow as tf
-tf.enable_eager_execution()
+tf.compat.v1.enable_eager_execution()
 HEIGHT_WIDTH = 299
 BATCH_SIZE = 10
 VERBOSE = 2
@@ -31,6 +31,7 @@ def utility_metric(y_true, y_pred):
         print_output = False
     return 0
 
+net.run_eagerly = True
 net.compile(
     optimizer='ADAM',
     loss='sparse_categorical_crossentropy',
