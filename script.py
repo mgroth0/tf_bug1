@@ -1,14 +1,16 @@
 import random
-
 import os
-
 import matplotlib.image as mpimg
 import cv2
-print('hello world')
 import tensorflow as tf
 HEIGHT_WIDTH = 299
 BATCH_SIZE = 10
-VERBOSE=2
+VERBOSE = 2
+
+SANITY_SWITCH = False
+
+print('starting script')
+
 net = tf.keras.applications.InceptionResNetV2(
     include_top=True,
     weights=None,  # 'imagenet',
@@ -18,22 +20,19 @@ net = tf.keras.applications.InceptionResNetV2(
     classes=2,  # 1000,
     classifier_activation='softmax'
 )
-# def error_rate(y_true, y_pred):
-#     # if not isinstance(y_true, mparray):
-#     y_true = y_true.numpy()
-#     y_true = y_true[:, 0]
-#     # if not isinstance(y_pred, mparray):
-#     y_pred = y_pred.numpy()
-#
-#     # y_pred = y_pred[:, 0:2]
-#     y_pred = arr(list(map(maxindex, y_pred)))
-# def accuracy(y_true, y_pred):
-#     return 1 - error_rate(y_true, y_pred)
+
+print_output = True
+def utility_metric(y_true, y_pred):
+    global print_output
+    if print_output:
+        print(f'y_true:{y_true}')
+        print(f'y_pred:{y_pred}')
+        print_output = False
 
 net.compile(
     optimizer='ADAM',
     loss='sparse_categorical_crossentropy',
-    metrics=['accuracy']
+    metrics=['accuracy', utility_metric]
 )
 class_map = {'dog': 0, 'cat': 1}
 def preprocess(file):
@@ -45,10 +44,18 @@ def preprocess(file):
     return imdata, class_map[os.path.basename(os.path.dirname(file))]
 
 
-train_data = [f'data/Training/cat/{x}' for x in os.listdir('data/Training/cat')] + [f'data/Training/dog/{x}' for x in os.listdir('data/Training/dog')]
-test_data = [f'data/Testing/cat/{x}' for x in os.listdir('data/Testing/cat')] + [f'data/Testing/dog/{x}' for x in os.listdir('data/Testing/dog')]
+train_data = [f'data/Training/cat/{x}' for x in os.listdir('data/Training/cat')] + [f'data/Training/dog/{x}' for x in
+                                                                                    os.listdir('data/Training/dog')]
+test_data = [f'data/Testing/cat/{x}' for x in os.listdir('data/Testing/cat')] + [f'data/Testing/dog/{x}' for x in
+                                                                                 os.listdir('data/Testing/dog')]
+
 random.shuffle(train_data)
 random.shuffle(test_data)
+
+if SANITY_SWITCH:
+    tmp_data = train_data
+    train_data = test_data
+    test_data = tmp_data
 
 
 def get_gen(data):
@@ -77,21 +84,23 @@ def get_ds(data):
             tf.TensorShape(([BATCH_SIZE]))
         )
     )
+print('starting training')
 net.fit(
     get_ds(train_data),
     epochs=5,
     verbose=VERBOSE,
     use_multiprocessing=True,
     workers=16,
-    # steps_per_epoch=steps,
     batch_size=BATCH_SIZE,
     shuffle=False
 )
+print('starting testing')
+print_output = True
 net.evaluate(
     get_ds(test_data),
     verbose=VERBOSE,
-    # steps=steps,
     batch_size=BATCH_SIZE,
     use_multiprocessing=True,
     workers=16,
 )
+print('script complete')
