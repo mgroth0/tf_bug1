@@ -8,6 +8,7 @@ print('hello world')
 import tensorflow as tf
 HEIGHT_WIDTH = 299
 BATCH_SIZE = 10
+VERBOSE=2
 net = tf.keras.applications.InceptionResNetV2(
     include_top=True,
     weights=None,  # 'imagenet',
@@ -69,7 +70,7 @@ def get_ds(data):
 net.fit(
     get_ds(train_data),
     epochs=5,
-    # verbose=self.VERBOSE_MODE,
+    verbose=VERBOSE,
     use_multiprocessing=True,
     workers=16,
     # steps_per_epoch=steps,
@@ -78,7 +79,7 @@ net.fit(
 )
 net.evaluate(
     get_ds(test_data),
-    # verbose=self.VERBOSE_MODE
+    verbose=VERBOSE,
     # steps=steps,
     batch_size=BATCH_SIZE,
     use_multiprocessing=True,
