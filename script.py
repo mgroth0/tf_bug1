@@ -31,7 +31,7 @@ def preprocess(file):
     imdata.shape = (HEIGHT_WIDTH, HEIGHT_WIDTH, 3)
     imdata /= 127.5
     imdata -= 1.
-    return imdata, class_map[os.path.dirname(file)]
+    return imdata, class_map[os.path.basename(os.path.dirname(file))]
 
 
 train_data = [f'data/Training/cat/{x}' for x in os.listdir('data/Training/cat')] + [f'data/Training/dog/{x}' for x in os.listdir('data/Training/dog')]
