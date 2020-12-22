@@ -28,6 +28,7 @@ def utility_metric(y_true, y_pred):
         print(f'y_true:{y_true}')
         print(f'y_pred:{y_pred}')
         print_output = False
+    return 0
 
 net.compile(
     optimizer='ADAM',
