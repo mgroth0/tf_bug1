@@ -18,12 +18,22 @@ net = tf.keras.applications.InceptionResNetV2(
     classes=2,  # 1000,
     classifier_activation='softmax'
 )
-def test_metric(y_true, y_pred):
-    pass
+# def error_rate(y_true, y_pred):
+#     # if not isinstance(y_true, mparray):
+#     y_true = y_true.numpy()
+#     y_true = y_true[:, 0]
+#     # if not isinstance(y_pred, mparray):
+#     y_pred = y_pred.numpy()
+#
+#     # y_pred = y_pred[:, 0:2]
+#     y_pred = arr(list(map(maxindex, y_pred)))
+# def accuracy(y_true, y_pred):
+#     return 1 - error_rate(y_true, y_pred)
+
 net.compile(
     optimizer='ADAM',
     loss='sparse_categorical_crossentropy',
-    # metrics=[test_metric]
+    metrics=['accuracy']
 )
 class_map = {'dog': 0, 'cat': 1}
 def preprocess(file):
