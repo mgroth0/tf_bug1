@@ -1,3 +1,5 @@
+from copy import deepcopy
+
 import random
 import os
 import matplotlib.image as mpimg
@@ -108,7 +110,7 @@ net.fit(
     workers=16,
     batch_size=BATCH_SIZE,
     shuffle=False,
-    validation_data=test_data
+    validation_data=get_ds(deepcopy(test_data))
 )
 print('starting testing')
 print_output = True
