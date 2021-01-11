@@ -9,7 +9,7 @@ BATCH_SIZE = 10
 VERBOSE = 2
 
 SANITY_SWITCH = False
-SANITY_MIX = True
+SANITY_MIX = False
 
 print('starting script')
 
@@ -107,7 +107,8 @@ net.fit(
     use_multiprocessing=True,
     workers=16,
     batch_size=BATCH_SIZE,
-    shuffle=False
+    shuffle=False,
+    validation_data=test_data
 )
 print('starting testing')
 print_output = True
