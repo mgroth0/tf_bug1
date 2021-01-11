@@ -9,6 +9,7 @@ BATCH_SIZE = 10
 VERBOSE = 2
 
 SANITY_SWITCH = False
+SANITY_MIX = True
 
 print('starting script')
 
@@ -18,7 +19,7 @@ net = tf.keras.applications.InceptionResNetV2(
     input_tensor=None,
     input_shape=None,
     pooling=None,
-    classes=10, #2,  # 1000,
+    classes=2,  # 1000,
     classifier_activation='softmax'
 )
 
@@ -50,13 +51,23 @@ def preprocess(file):
     imdata -= 1.
     return imdata, class_map[os.path.basename(os.path.dirname(file))]
 
-train_data = [f'data/Training/cat/{x}' for x in os.listdir('data/Training/cat')] + [f'data/Training/dog/{x}' for x in os.listdir('data/Training/dog')]
-test_data = [f'data/Testing/cat/{x}' for x in os.listdir('data/Testing/cat')] + [f'data/Testing/dog/{x}' for x in os.listdir('data/Testing/dog')]
+train_data = [f'data/Training/cat/{x}' for x in os.listdir('data/Training/cat')] + [f'data/Training/dog/{x}' for x in
+                                                                                    os.listdir('data/Training/dog')]
+test_data = [f'data/Testing/cat/{x}' for x in os.listdir('data/Testing/cat')] + [f'data/Testing/dog/{x}' for x in
+                                                                                 os.listdir('data/Testing/dog')]
 
 random.shuffle(train_data)
 random.shuffle(test_data)
 
+if SANITY_MIX:
+    print('doing SANITY_MIX')
+    mixed_data = train_data + test_data
+    random.shuffle(mixed_data)
+    train_data = mixed_data[:len(train_data)]
+    test_data = mixed_data[len(train_data):]
+
 if SANITY_SWITCH:
+    print('doing SANITY_SWITCH')
     tmp_data = train_data
     train_data = test_data
     test_data = tmp_data
