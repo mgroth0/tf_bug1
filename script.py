@@ -14,11 +14,11 @@ print('starting script')
 
 net = tf.keras.applications.InceptionResNetV2(
     include_top=True,
-    weights=None,  # 'imagenet',
+    weights=None,  # 'imagenet' v,
     input_tensor=None,
     input_shape=None,
     pooling=None,
-    classes=2,  # 1000,
+    classes=10, #2,  # 1000,
     classifier_activation='softmax'
 )
 
