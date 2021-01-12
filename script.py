@@ -15,7 +15,8 @@ SANITY_MIX = True
 
 print('starting script')
 
-net = tf.keras.applications.InceptionResNetV2(
+# net = tf.keras.applications.InceptionResNetV2(
+net = tf.keras.applications.InceptionV3(
     include_top=True,
     weights=None,  # 'imagenet' v,
     input_tensor=None,
