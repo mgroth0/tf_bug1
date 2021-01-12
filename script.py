@@ -11,7 +11,7 @@ BATCH_SIZE = 10
 VERBOSE = 2
 
 SANITY_SWITCH = False
-SANITY_MIX = False
+SANITY_MIX = True
 
 print('starting script')
 
