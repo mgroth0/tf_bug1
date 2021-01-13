@@ -6,7 +6,8 @@ import matplotlib.image as mpimg
 import cv2
 import tensorflow as tf
 tf.compat.v1.enable_eager_execution()
-HEIGHT_WIDTH = 299
+# HEIGHT_WIDTH = 299
+HEIGHT_WIDTH = 224
 BATCH_SIZE = 10
 VERBOSE = 2
 
@@ -15,8 +16,10 @@ SANITY_MIX = True
 
 print('starting script')
 
+# tf.keras.applications.vgg19
 # net = tf.keras.applications.InceptionResNetV2(
-net = tf.keras.applications.InceptionV3(
+# net = tf.keras.applications.InceptionV3(
+net = tf.keras.applications.VGG19(
     include_top=True,
     weights=None,  # 'imagenet' v,
     input_tensor=None,
