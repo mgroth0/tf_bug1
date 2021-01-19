@@ -34,7 +34,9 @@ def assemble_layers(inputs):
         return MaxPooling2D(3, *args, strides=2, data_format=data_format(), **kwargs)
 
     def _dense(*args, dropout=False, **kwargs):
+        global _next_dense_i
         def f(inputs):
+            global _next_dense_i
             d = Dense(*args, name=f'dense_{_next_dense_i}', **kwargs)(inputs)
             print('_dense1')
             if dropout:
@@ -110,7 +112,7 @@ def assemble_layers(inputs):
                     )
                 )
             else:
-                err(f'bad CI: {CI}')
+                raise Exception(f'bad CI: {CI}')
             scale = k
             for i in range(n):
                 if CI == 0:
@@ -120,7 +122,7 @@ def assemble_layers(inputs):
                 elif CI == 2:
                     scale += alpha * extra_channels[:, :, :, i:i + ch]
                 else:
-                    err(f'bad CI: {CI}')
+                    raise Exception(f'bad CI: {CI}')
 
             scale = scale**beta
             return X / scale
