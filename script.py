@@ -138,7 +138,7 @@ def get_ds(data):
 print('starting training')
 net.fit(
     get_ds(train_data),
-    epochs=5,
+    epochs=50,
     verbose=VERBOSE,
     use_multiprocessing=True,
     workers=16,
