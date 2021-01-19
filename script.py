@@ -1,11 +1,14 @@
 from copy import deepcopy
-
 import random
 import os
+
 import matplotlib.image as mpimg
 import cv2
 import tensorflow as tf
-from tensorflow.python.keras import Sequential
+
+from inc_test import assemble_layers
+
+
 tf.compat.v1.enable_eager_execution()
 # HEIGHT_WIDTH = 299
 HEIGHT_WIDTH = 224
@@ -18,29 +21,31 @@ SANITY_MIX = True
 print('starting script')
 
 # tf.keras.applications.vgg19
-net = tf.keras.applications.InceptionResNetV2(
-    # net = tf.keras.applications.InceptionV3(
-    # net = tf.keras.applications.VGG19(
-    include_top=True,
-    weights=None,  # 'imagenet' v,
-    input_tensor=None,
-    input_shape=None,
-    pooling=None,
-    classes=2,  # 1000,
-    classifier_activation='softmax'
-)
+# net = tf.keras.applications.InceptionResNetV2(
+#     # net = tf.keras.applications.InceptionV3(
+#     # net = tf.keras.applications.VGG19(
+#     include_top=True,
+#     weights=None,  # 'imagenet' v,
+#     input_tensor=None,
+#     input_shape=None,
+#     pooling=None,
+#     classes=2,  # 1000,
+#     classifier_activation='softmax'
+# )
+#
+# model = Sequential()
+# for layer in net.layers[:-1]:  # go through until last layer
+#     if "_bn" in layer.name or "batch_normalization" in layer.name:
+#         print(f'skipping {layer.name}')
+#     else:
+#         print(f'adding {layer.name}')
+#         model.add(layer)
+# # model.add(Dense(3, activation='softmax'))
+# model.summary()
+# net = model
+# # model.compile(optimizer='adam', loss='categorical_crossentropy')
 
-model = Sequential()
-for layer in net.layers[:-1]:  # go through until last layer
-    if "_bn" in layer.name:
-        print(f'skipping {layer.name}')
-    else:
-        print(f'adding {layer.name}')
-        model.add(layer)
-# model.add(Dense(3, activation='softmax'))
-model.summary()
-net = model
-# model.compile(optimizer='adam', loss='categorical_crossentropy')
+net = assemble_layers()
 
 print_output = True
 def utility_metric(y_true, y_pred):
