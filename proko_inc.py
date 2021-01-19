@@ -7,7 +7,7 @@ from tensorflow.python.keras.utils import layer_utils
 from tensorflow.python.lib.io import file_io
 
 
-from tensorflow.python.keras import layers
+# from tensorflow.python.keras import layers
 
 BASE_WEIGHT_URL = ('https://storage.googleapis.com/tensorflow/'
                    'keras-applications/inception_resnet_v2/')
@@ -26,8 +26,8 @@ def CustomInceptionResNetV2(include_top=True,
 
 
 
-    # if 'layers' in kwargs:
-    #     layers = kwargs.pop('layers')
+    if 'layers' in kwargs:
+        layers = kwargs.pop('layers')
     # else:
         # layers = VersionAwareLayers()
     #   see import
