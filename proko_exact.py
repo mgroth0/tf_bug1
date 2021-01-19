@@ -294,7 +294,6 @@ def inception_resnet_block(x, scale, block_type, block_idx, activation='relu'):
 
 def train(model_class, epochs):
     print('starting script')
-
     net = model_class(
         include_top=True,
         weights=None,  # 'imagenet',
@@ -305,8 +304,6 @@ def train(model_class, epochs):
         classifier_activation='sigmoid',
         layers=tf.keras.layers
     )
-
-
     net.compile(
         optimizer='adam',
         loss='binary_crossentropy',
@@ -323,11 +320,29 @@ def train(model_class, epochs):
         )
         return imdata, class_map[os.path.basename(os.path.dirname(file))]
 
-    train_data = [f'data/Training/cat/{x}' for x in os.listdir('data/Training/cat')] + [f'data/Training/dog/{x}' for x in os.listdir('data/Training/dog')]
-    test_data = [f'data/Testing/cat/{x}' for x in os.listdir('data/Testing/cat')] + [f'data/Testing/dog/{x}' for x in os.listdir('data/Testing/dog')]
+    train_data_cat = [f'data/Training/cat/{x}' for x in os.listdir('data/Training/cat')]
+    train_data_dog = [f'data/Training/dog/{x}' for x in os.listdir('data/Training/dog')]
+
+    train_data_cat = random.shuffle(train_data_cat)[0:20]
+    train_data_dog = random.shuffle(train_data_dog)[0:20]
+
+    train_data = train_data_cat + train_data_dog
+
+    test_data_cat = [f'data/Testing/cat/{x}' for x in os.listdir('data/Testing/cat')]
+    test_data_dog = [f'data/Testing/dog/{x}' for x in os.listdir('data/Testing/dog')]
+
+    test_data_cat = random.shuffle(test_data_cat)[0:20]
+    test_data_dog = random.shuffle(test_data_dog)[0:20]
+
+    test_data = test_data_cat + test_data_dog
+
+
 
     random.shuffle(train_data)
     random.shuffle(test_data)
+
+    # DEBUG
+    test_data = train_data
 
 
     def get_gen(data):
@@ -374,4 +389,4 @@ def train(model_class, epochs):
     ))
     print('script complete')
 
-train(CustomInceptionResNetV2, 50) # more epochs without BN is required to get to overfit
+train(CustomInceptionResNetV2, 50)  # more epochs without BN is required to get to overfit
