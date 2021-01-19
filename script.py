@@ -94,10 +94,12 @@ def utility_metric(y_true, y_pred):
 
 
 net.compile(
-    optimizer='ADAM',
+    # optimizer='ADAM',
+    optimizer='adam',
     # loss='sparse_categorical_crossentropy',
     loss='binary_crossentropy',
-    metrics=['accuracy', utility_metric]
+    # metrics=['accuracy', utility_metric]
+    metrics=['accuracy']
 )
 
 net.run_eagerly = True
