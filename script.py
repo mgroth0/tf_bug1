@@ -50,16 +50,29 @@ print('starting script')
 # net = model
 # # model.compile(optimizer='adam', loss='categorical_crossentropy')
 
-dims = [HW, HW, HW]
-dims[CHANNEL_AXIS - 1] = 3
-from tensorflow.python.keras import Input
-inputs = Input(tuple(dims))
 
-net = tf.python.keras.models.Model(
-    inputs=inputs,
-    outputs=assemble_layers(inputs)
-    # name=self.FULL_NAME.replace(' ', '_')
-)
+
+
+
+
+
+# dims = [HW, HW, HW]
+# dims[CHANNEL_AXIS - 1] = 3
+# from tensorflow.python.keras import Input
+# inputs = Input(tuple(dims))
+#
+# net = tf.python.keras.models.Model(
+#     inputs=inputs,
+#     outputs=assemble_layers(inputs)
+#     # name=self.FULL_NAME.replace(' ', '_')
+# )
+
+
+
+
+
+from proko_inc import CustomInceptionResNetV2
+net = CustomInceptionResNetV2()
 
 print_output = True
 def utility_metric(y_true, y_pred):
