@@ -9,7 +9,11 @@ CI = CHANNEL_INDEX
 CA = CHANNEL_AXIS
 
 ALEX_HW = 227
+
+_next_dense_i = 1
+
 def assemble_layers(inputs):
+    global _next_dense_i
     _next_dense_i = 1
     from tensorflow.keras.layers import (
         Dense,
