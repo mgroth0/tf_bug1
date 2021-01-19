@@ -6,7 +6,7 @@ import matplotlib.image as mpimg
 import cv2
 import tensorflow as tf
 
-from inc_test import assemble_layers
+from inc_test import assemble_layers, CHANNEL_AXIS, INC_HW
 
 
 tf.compat.v1.enable_eager_execution()
@@ -45,7 +45,16 @@ print('starting script')
 # net = model
 # # model.compile(optimizer='adam', loss='categorical_crossentropy')
 
-net = assemble_layers()
+dims = [INC_HW, INC_HW, INC_HW]
+dims[CHANNEL_AXIS - 1] = 3
+from tensorflow.python.keras import Input
+inputs = Input(tuple(dims))
+
+net = tf.python.keras.models.Model(
+    inputs=inputs,
+    outputs=assemble_layers(inputs)
+    # name=self.FULL_NAME.replace(' ', '_')
+)
 
 print_output = True
 def utility_metric(y_true, y_pred):

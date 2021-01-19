@@ -3,7 +3,7 @@
 INC_HW = 299
 CHANNEL_AXIS = 3
 
-def assemble_layers():
+def assemble_layers(inputs):
     from tensorflow.keras.layers import (
         Dense,
         MaxPooling2D,
@@ -151,10 +151,7 @@ def assemble_layers():
 
 
 
-    dims = [INC_HW, INC_HW, INC_HW]
-    dims[CHANNEL_AXIS - 1] = 3
-    from tensorflow.python.keras import Input
-    inputs = Input(tuple(dims))
+
 
     # Stem block: 35 x 35 x 192
     x = MaxPooling2D(3, strides=2)(
