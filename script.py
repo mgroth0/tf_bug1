@@ -6,15 +6,17 @@ import matplotlib.image as mpimg
 import cv2
 import tensorflow as tf
 
-# from inc_test import assemble_layers, CHANNEL_AXIS, INC_HW
-from alex_test import assemble_layers, CHANNEL_AXIS, ALEX_HW
-HW = ALEX_HW
+from inc_test import assemble_layers, CHANNEL_AXIS, INC_HW
+HW = INC_HW
+
+# from alex_test import assemble_layers, CHANNEL_AXIS, ALEX_HW
+# HW = ALEX_HW
 
 
 tf.compat.v1.enable_eager_execution()
-# HEIGHT_WIDTH = 299 #inc
+HEIGHT_WIDTH = 299 #inc
 # HEIGHT_WIDTH = 224
-HEIGHT_WIDTH = 227 #alex
+# HEIGHT_WIDTH = 227 #alex
 BATCH_SIZE = 10
 VERBOSE = 2
 
