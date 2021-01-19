@@ -342,7 +342,7 @@ def train(model_class, epochs):
     random.shuffle(test_data)
 
     # DEBUG
-    test_data = train_data
+    # test_data = train_data
 
 
     def get_gen(data):
