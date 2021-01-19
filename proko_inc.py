@@ -11,7 +11,7 @@ from tensorflow.python.lib.io import file_io
 
 BASE_WEIGHT_URL = ('https://storage.googleapis.com/tensorflow/'
                    'keras-applications/inception_resnet_v2/')
-# layers = None
+layers = None
 
 def CustomInceptionResNetV2(include_top=True,
                             weights='imagenet',
@@ -21,7 +21,7 @@ def CustomInceptionResNetV2(include_top=True,
                             classes=1000,
                             classifier_activation='softmax',
                             **kwargs):
-    # global layers
+    global layers
 
 
 
