@@ -6,12 +6,15 @@ import matplotlib.image as mpimg
 import cv2
 import tensorflow as tf
 
-from inc_test import assemble_layers, CHANNEL_AXIS, INC_HW
+# from inc_test import assemble_layers, CHANNEL_AXIS, INC_HW
+from alex_test import assemble_layers, CHANNEL_AXIS, ALEX_HW
+HW = ALEX_HW
 
 
 tf.compat.v1.enable_eager_execution()
-HEIGHT_WIDTH = 299
+# HEIGHT_WIDTH = 299 #inc
 # HEIGHT_WIDTH = 224
+HEIGHT_WIDTH = 227 #alex
 BATCH_SIZE = 10
 VERBOSE = 2
 
@@ -45,7 +48,7 @@ print('starting script')
 # net = model
 # # model.compile(optimizer='adam', loss='categorical_crossentropy')
 
-dims = [INC_HW, INC_HW, INC_HW]
+dims = [HW, HW, HW]
 dims[CHANNEL_AXIS - 1] = 3
 from tensorflow.python.keras import Input
 inputs = Input(tuple(dims))
