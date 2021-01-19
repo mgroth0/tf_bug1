@@ -1,15 +1,17 @@
 from tensorflow.python.keras import backend
 from tensorflow.python.keras.applications import imagenet_utils
 from tensorflow.python.keras.engine import training
-from tensorflow.python.keras.layers import VersionAwareLayers
+# from tensorflow.python.keras.layers import VersionAwareLayers
 from tensorflow.python.keras.utils import data_utils
 from tensorflow.python.keras.utils import layer_utils
 from tensorflow.python.lib.io import file_io
 
 
+from tensorflow.python.keras import layers
+
 BASE_WEIGHT_URL = ('https://storage.googleapis.com/tensorflow/'
                    'keras-applications/inception_resnet_v2/')
-layers = None
+# layers = None
 
 def CustomInceptionResNetV2(include_top=True,
                             weights='imagenet',
@@ -19,11 +21,21 @@ def CustomInceptionResNetV2(include_top=True,
                             classes=1000,
                             classifier_activation='softmax',
                             **kwargs):
-    global layers
-    if 'layers' in kwargs:
-        layers = kwargs.pop('layers')
-    else:
-        layers = VersionAwareLayers()
+    # global layers
+
+
+
+
+    # if 'layers' in kwargs:
+    #     layers = kwargs.pop('layers')
+    # else:
+        # layers = VersionAwareLayers()
+    #   see import
+
+
+
+
+
     if kwargs:
         raise ValueError('Unknown argument(s): %s' % (kwargs,))
     if not (weights in {'imagenet', None} or file_io.file_exists_v2(weights)):
