@@ -106,11 +106,23 @@ class_map = {'dog': 0, 'cat': 1}
 
 def preprocess(file):
     imdata = mpimg.imread(file)
-    imdata = cv2.resize(imdata, dsize=(HEIGHT_WIDTH, HEIGHT_WIDTH), interpolation=cv2.INTER_LINEAR)
-    imdata.shape = (HEIGHT_WIDTH, HEIGHT_WIDTH, 3)
-    imdata /= 127.5
-    imdata -= 1.
+
+
+
+
+    # imdata = cv2.resize(imdata, dsize=(HEIGHT_WIDTH, HEIGHT_WIDTH), interpolation=cv2.INTER_LINEAR)
+    # imdata.shape = (HEIGHT_WIDTH, HEIGHT_WIDTH, 3)
+    # imdata /= 127.5
+    # imdata -= 1.
+
+    imdata = cv2.resize(imdata, dsize=(HEIGHT_WIDTH, HEIGHT_WIDTH), interpolation=cv2.INTER_LINEAR) * 255.0
+    imdata = tf.keras.applications.inception_resnet_v2.preprocess_input(
+        imdata, data_format=None
+    )
+
     return imdata, class_map[os.path.basename(os.path.dirname(file))]
+
+
 
 train_data = [f'data/Training/cat/{x}' for x in os.listdir('data/Training/cat')] + [f'data/Training/dog/{x}' for x in
                                                                                     os.listdir('data/Training/dog')]
