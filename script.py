@@ -72,7 +72,16 @@ print('starting script')
 
 
 from proko_inc import CustomInceptionResNetV2
-net = CustomInceptionResNetV2()
+net = CustomInceptionResNetV2(
+    include_top=True,
+    weights=None,  # 'imagenet',
+    input_tensor=None,
+    input_shape=None,
+    pooling=None,
+    classes=1,  # 1000,2
+    classifier_activation='sigmoid',
+    layers=tf.keras.layers
+)
 
 print_output = True
 def utility_metric(y_true, y_pred):
@@ -86,7 +95,8 @@ def utility_metric(y_true, y_pred):
 
 net.compile(
     optimizer='ADAM',
-    loss='sparse_categorical_crossentropy',
+    # loss='sparse_categorical_crossentropy',
+    loss='binary_crossentropy',
     metrics=['accuracy', utility_metric]
 )
 
