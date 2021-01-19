@@ -201,9 +201,12 @@ def assemble_layers(inputs):
     def get_output_shape_for(input_shape):
         return input_shape
 
+
+    preds = 2 # 1000
+
     return Activation('softmax', name='softmax')(
         _dense(
-            1000,
+            preds,
         )(_dense(
             4096,
             activation='relu',
