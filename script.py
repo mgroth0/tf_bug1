@@ -10,8 +10,8 @@ from inc_test import assemble_layers, CHANNEL_AXIS, INC_HW
 
 
 tf.compat.v1.enable_eager_execution()
-# HEIGHT_WIDTH = 299
-HEIGHT_WIDTH = 224
+HEIGHT_WIDTH = 299
+# HEIGHT_WIDTH = 224
 BATCH_SIZE = 10
 VERBOSE = 2
 
