@@ -1,4 +1,3 @@
-import tensorflow as tf
 from tensorflow.python.keras import backend
 from tensorflow.python.keras.applications import imagenet_utils
 from tensorflow.python.keras.engine import training
@@ -6,8 +5,6 @@ from tensorflow.python.keras.engine import training
 from tensorflow.python.keras.utils import data_utils
 from tensorflow.python.keras.utils import layer_utils
 from tensorflow.python.lib.io import file_io
-from tensorflow.python.util.tf_export import keras_export
-from tensorflow.keras.applications import InceptionResNetV2
 
 import random
 import os
@@ -292,7 +289,7 @@ def inception_resnet_block(x, scale, block_type, block_idx, activation='relu'):
         x = layers.Activation(activation, name=block_name + '_ac')(x)
     return x
 
-def train(model_class, epochs):
+def train(model_class, epochs, num_ims_per_class):
     print('starting script')
     net = model_class(
         include_top=True,
@@ -320,8 +317,11 @@ def train(model_class, epochs):
         )
         return imdata, class_map[os.path.basename(os.path.dirname(file))]
 
-    IM_COUNT = 20 # I think it learned in like 12 epochs, not sure
-
+    # IM_COUNT = 20 # I think it learned in like 12 epochs, not sure
+    # another try:
+    #     train: starting really getting better around e.27
+    #     test: started really getting better around e.24
+    #  ended with train and test accuracy both being 0.9!
 
     # IM_COUNT = 35
     # try 1: seemed to start learning at epoch 10, reaching .92 accuracy by 31, but then went back down to .50 at epoch 41 and never recovered
@@ -340,19 +340,17 @@ def train(model_class, epochs):
     train_data_dog = [f'data/Training/dog/{x}' for x in os.listdir('data/Training/dog')]
     random.shuffle(train_data_cat)
     random.shuffle(train_data_dog)
-    train_data_cat = train_data_cat[0:IM_COUNT]
-    train_data_dog = train_data_dog[0:IM_COUNT]
+    train_data_cat = train_data_cat[0:num_ims_per_class]
+    train_data_dog = train_data_dog[0:num_ims_per_class]
     train_data = train_data_cat + train_data_dog
 
     test_data_cat = [f'data/Testing/cat/{x}' for x in os.listdir('data/Testing/cat')]
     test_data_dog = [f'data/Testing/dog/{x}' for x in os.listdir('data/Testing/dog')]
     random.shuffle(test_data_cat)
     random.shuffle(test_data_dog)
-    test_data_cat = test_data_cat[0:IM_COUNT]
-    test_data_dog = test_data_dog[0:IM_COUNT]
+    test_data_cat = test_data_cat[0:num_ims_per_class]
+    test_data_dog = test_data_dog[0:num_ims_per_class]
     test_data = test_data_cat + test_data_dog
-
-
 
     random.shuffle(train_data)
     random.shuffle(test_data)
@@ -387,7 +385,7 @@ def train(model_class, epochs):
                 tf.TensorShape(([BATCH_SIZE]))
             )
         )
-    print('starting training')
+    print(f'starting training (num ims per class = {num_ims_per_class})')
     net.fit(
         get_ds(train_data),
         epochs=epochs,
@@ -405,4 +403,5 @@ def train(model_class, epochs):
     ))
     print('script complete')
 
-train(CustomInceptionResNetV2, 50)  # more epochs without BN is required to get to overfit
+for i in range(20, 40):
+    train(CustomInceptionResNetV2, 50, i)  # more epochs without BN is required to get to overfit
