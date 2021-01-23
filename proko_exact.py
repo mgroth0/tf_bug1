@@ -320,10 +320,10 @@ def train(model_class, epochs):
         )
         return imdata, class_map[os.path.basename(os.path.dirname(file))]
 
-    # IM_COUNT = 20 # I think it learned in like 12 epochs, not sure
+    IM_COUNT = 20 # I think it learned in like 12 epochs, not sure
 
 
-    IM_COUNT = 35
+    # IM_COUNT = 35
     # try 1: seemed to start learning at epoch 10, reaching .92 accuracy by 31, but then went back down to .50 at epoch 41 and never recovered
     # try 2: didnt really learn ever
 
@@ -331,7 +331,10 @@ def train(model_class, epochs):
     # look at both accuracy and val accuracy!
 
 
-    IM_COUNT = 50 # 0.5 until epoch 44, then started going up and down a bit until epoch 50. max 0.68, never below 0.5
+    # IM_COUNT = 50 # 0.5 until epoch 44, then started going up and down a bit until epoch 50. max 0.68, never below 0.5
+    # another try:
+    #     train: never above .52
+    #     test: always .5
 
     train_data_cat = [f'data/Training/cat/{x}' for x in os.listdir('data/Training/cat')]
     train_data_dog = [f'data/Training/dog/{x}' for x in os.listdir('data/Training/dog')]
