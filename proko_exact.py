@@ -320,7 +320,9 @@ def train(model_class, epochs):
         )
         return imdata, class_map[os.path.basename(os.path.dirname(file))]
 
-    IM_COUNT = 50 #20
+    # IM_COUNT = 20 # I think it learned in like 12 epochs, not sure
+    IM_COUNT = 35
+    # IM_COUNT = 50 # 0.5 until epoch 44, then started going up and down a bit until epoch 50. max 0.68, never below 0.5
 
     train_data_cat = [f'data/Training/cat/{x}' for x in os.listdir('data/Training/cat')]
     train_data_dog = [f'data/Training/dog/{x}' for x in os.listdir('data/Training/dog')]
