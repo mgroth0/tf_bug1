@@ -104,8 +104,10 @@ def train(epoch):
         optimizer.step()
         if batch_ix % 100 == 0 and batch_ix>0:
             import pdb; pdb.set_trace()
+            # print('[Epoch %2d, batch %3d] training loss: %.4f' %
+            #       (epoch, batch_ix, loss.data[0]))
             print('[Epoch %2d, batch %3d] training loss: %.4f' %
-                  (epoch, batch_ix, loss.data[0]))
+                  (epoch, batch_ix, loss.data.item()))
 
 
 # Test the model on one epoch of validation data
@@ -122,6 +124,7 @@ def test():
 
         top1.add(output.data, target.data)
         test_loss.add(loss.data[0])
+
 
     print('[Epoch %2d] Average test loss: %.3f, accuracy: %.2f%%\n'
           %(epoch, test_loss.value()[0], top1.value()[0]))
