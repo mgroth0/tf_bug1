@@ -406,5 +406,6 @@ def train(model_class, epochs, num_ims_per_class):
 
 for i in range(20, 40, 5):
     net = train(CustomInceptionResNetV2, 25, i)  # more epochs without BN is required to get to overfit
-    breakpoint()
+    # breakpoint()
+    import pdb; pdb.set_trace()
 
