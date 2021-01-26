@@ -386,7 +386,7 @@ def train(model_class, epochs, num_ims_per_class):
             )
         )
     print(f'starting training (num ims per class = {num_ims_per_class})')
-    net.fit(
+    history = net.fit(
         get_ds(train_data),
         epochs=epochs,
         verbose=VERBOSE,
@@ -402,10 +402,10 @@ def train(model_class, epochs, num_ims_per_class):
         use_multiprocessing=False
     ))
     print('script complete')
-    return net
+    return history
 
 for i in range(20, 40, 5):
-    net = train(CustomInceptionResNetV2, 25, i)  # more epochs without BN is required to get to overfit
+    history = train(CustomInceptionResNetV2, 25, i)  # more epochs without BN is required to get to overfit
     # breakpoint()
     import pdb; pdb.set_trace()
 
