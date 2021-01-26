@@ -103,6 +103,7 @@ def train(epoch):
         loss.backward()
         optimizer.step()
         if batch_ix % 100 == 0 and batch_ix>0:
+            import pdb; pdb.set_trace()
             print('[Epoch %2d, batch %3d] training loss: %.4f' %
                   (epoch, batch_ix, loss.data[0]))
 
