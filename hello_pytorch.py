@@ -129,6 +129,7 @@ def test():
           % (epoch, test_loss.value()[0], top1.value()[0]))
 
 
+
 if __name__ == "__main__":
     for epoch in range(1, args.epochs + 1):
         train(epoch)
