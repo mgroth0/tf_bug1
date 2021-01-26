@@ -404,8 +404,21 @@ def train(model_class, epochs, num_ims_per_class):
     print('script complete')
     return history
 
-for i in range(20, 40, 5):
-    history = train(CustomInceptionResNetV2, 25, i)  # more epochs without BN is required to get to overfit
-    # breakpoint()
-    import pdb; pdb.set_trace()
+data_result = []
 
+for i in range(20, 40, 10):
+    num_epochs = 3
+    history = train(CustomInceptionResNetV2, num_epochs, i)  # more epochs without BN is required to get to overfit
+    # breakpoint()
+    data_result.append({
+        'num_images': i,
+        'history'   : history.history
+    })
+    # import pdb; pdb.set_trace()
+os.mkdir('data_result')
+import time
+fold = f'data_result/{time.time()}'
+os.mkdir(fold)
+with open(f'{fold}/data_result.json', 'w') as f:
+    import json
+    f.write(json.dumps(data_result))
