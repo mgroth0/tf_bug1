@@ -412,7 +412,7 @@ def train(model_class, epochs, num_ims_per_class):
 data_result = []
 
 for i in range(20, 40, 2):
-    num_epochs = 20
+    num_epochs = 50
     history = train(CustomInceptionResNetV2, num_epochs, i)  # more epochs without BN is required to get to overfit
     # breakpoint()
     data_result.append({
@@ -424,7 +424,7 @@ def mkdirs(s):
     if not os.path.exists(s):
         os.makedirs(s)
 import time
-fold = f'data_result/{int(time.time())}'
+fold = f'data_result/keras_{int(time.time())}'
 mkdirs(fold)
 with open(f'{fold}/data_result.json', 'w') as f:
     import json

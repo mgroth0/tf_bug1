@@ -241,13 +241,15 @@ def train(model, epochs, num_ims_per_class):
                 # import pdb; pdb.set_trace()
                 # print('[Epoch %2d, batch %3d] training loss: %.4f' %
                 #       (epoch, batch_ix, loss.data[0]))
-                print('[Epoch %2d, batch %3d] training loss: %.4f' %
-                      (epoch, batch_ix, loss.data.item()))
+                # print('[Epoch %2d, batch %3d] training loss: %.4f' %
+                #       (epoch, batch_ix, loss.data.item()))
+        print('[Epoch %2d] Average TRAIN loss: %.3f, accuracy: %.2f%%\n'
+              % (epoch, float(mean(epoch_loss)), top1.value()[0]))
         history['loss'].append(mean(epoch_loss))
         history['accuracy'].append(top1.value()[0])
 
 
-        print(f'eval or epoch {epoch}')
+        print(f'eval on epoch {epoch}')
         model.eval()
         test_loss = tnt.meter.AverageValueMeter()
         top1 = tnt.meter.ClassErrorMeter()
@@ -262,7 +264,7 @@ def train(model, epochs, num_ims_per_class):
             # test_loss.add(loss.data[0])
             test_loss.add(loss.data.item())
 
-        print('[Epoch %2d] Average test loss: %.3f, accuracy: %.2f%%\n'
+        print('[Epoch %2d] Average TEST loss: %.3f, accuracy: %.2f%%\n'
               % (epoch, test_loss.value()[0], top1.value()[0]))
         history['val_loss'].append(test_loss.value()[0])
         history['val_accuracy'].append(top1.value()[0])
@@ -299,7 +301,7 @@ def mkdirs(s):
     if not os.path.exists(s):
         os.makedirs(s)
 import time
-fold = f'data_result/{int(time.time())}'
+fold = f'data_result/pytorch_{int(time.time())}'
 mkdirs(fold)
 with open(f'{fold}/data_result.json', 'w') as f:
     import json
