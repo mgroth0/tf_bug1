@@ -90,7 +90,7 @@ def train(model, epochs, num_ims_per_class):
 
             # filename = self.filenames[idx]
             img = Image.open(file).convert(self.space)
-            transforms = self.transform()
+            transforms = self.transform(img)
             tensor = transforms(img)
             # basename = os.path.basename(file).split('.')[0].split('_')[-1]
             # label = self.synset2label[self.validation_synset_labels[int(basename) - 1]]
