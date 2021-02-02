@@ -210,14 +210,14 @@ def train(model, epochs, num_ims_per_class):
 
 
     print(f'starting training (num ims per class = {num_ims_per_class})')
-    history = net.fit(
-        get_ds(train_data),
-        epochs=epochs,
-        verbose=VERBOSE,
-        use_multiprocessing=False,
-        shuffle=False,
-        validation_data=get_ds(train_data)
-    )
+    # history = net.fit(
+    #     get_ds(train_data),
+    #     epochs=epochs,
+    #     verbose=VERBOSE,
+    #     use_multiprocessing=False,
+    #     shuffle=False,
+    #     validation_data=get_ds(train_data)
+    # )
 
     history = {'loss':[],'accuracy':[],'val_loss':[],'val_accuracy':[]}
 
