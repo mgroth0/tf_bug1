@@ -17,7 +17,7 @@ import os
 # import tensorflow as tf
 
 # from mlib.boot.mlog import err
-from tf_bug1.zhulf_inc import Inception_ResNetv2
+from zhulf_inc import Inception_ResNetv2
 
 
 HEIGHT_WIDTH = 299
