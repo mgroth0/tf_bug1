@@ -56,7 +56,7 @@ class Inception_ResNet_A(nn.Module):
             my_conv_2d(32, 48, 3, stride=1, padding=1, bias=False),
             my_conv_2d(48, 64, 3, stride=1, padding=1, bias=False)
         )
-        self.conv = nn.my_conv_2d(128, 320, 1, stride=1, padding=0, bias=True)
+        self.conv = my_conv_2d(128, 320, 1, stride=1, padding=0, bias=True)
         self.relu = nn.ReLU(inplace=True)
     def forward(self, x):
         x0 = self.branch_0(x)
@@ -77,7 +77,7 @@ class Inception_ResNet_B(nn.Module):
             my_conv_2d(128, 160, (1, 7), stride=1, padding=(0, 3), bias=False),
             my_conv_2d(160, 192, (7, 1), stride=1, padding=(3, 0), bias=False)
         )
-        self.conv = nn.my_conv_2d(384, 1088, 1, stride=1, padding=0, bias=True)
+        self.conv = my_conv_2d(384, 1088, 1, stride=1, padding=0, bias=True)
         self.relu = nn.ReLU(inplace=True)
     def forward(self, x):
         x0 = self.branch_0(x)
@@ -124,7 +124,7 @@ class Inception_ResNet_C(nn.Module):
             my_conv_2d(192, 224, (1, 3), stride=1, padding=(0, 1), bias=False),
             my_conv_2d(224, 256, (3, 1), stride=1, padding=(1, 0), bias=False)
         )
-        self.conv = nn.my_conv_2d(448, 2080, 1, stride=1, padding=0, bias=True)
+        self.conv = my_conv_2d(448, 2080, 1, stride=1, padding=0, bias=True)
         self.relu = nn.ReLU(inplace=True)
     def forward(self, x):
         x0 = self.branch_0(x)
