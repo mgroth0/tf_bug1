@@ -101,7 +101,7 @@ def train(model, epochs, num_ims_per_class):
             # imdata = tf.keras.applications.inception_resnet_v2.preprocess_input(
             #     imdata, data_format=None
             # )
-            return imdata, label
+            return tensor, label
 
         def __len__(self):
             # return len(self.X)
