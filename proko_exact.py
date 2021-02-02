@@ -12,6 +12,8 @@ import matplotlib.image as mpimg
 import cv2
 import tensorflow as tf
 
+from mlib.boot.mlog import err
+
 
 HEIGHT_WIDTH = 299
 BATCH_SIZE = 10
@@ -21,6 +23,7 @@ BASE_WEIGHT_URL = ('https://storage.googleapis.com/tensorflow/'
                    'keras-applications/inception_resnet_v2/')
 layers = None
 
+err('pretrained')
 def CustomInceptionResNetV2(include_top=True,
                             weights='imagenet',
                             input_tensor=None,
