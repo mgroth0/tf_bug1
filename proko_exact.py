@@ -412,8 +412,8 @@ def train(model_class, epochs, num_ims_per_class):
 data_result = []
 
 # for i in range(20, 40, 2):
-for i in range(96, 102, 2):
-    num_epochs = 2 # 50
+for i in range(20, 102, 1):
+    num_epochs = 50
     history = train(CustomInceptionResNetV2, num_epochs, i)  # more epochs without BN is required to get to overfit
     # breakpoint()
     data_result.append({

@@ -287,11 +287,11 @@ def train(model, epochs, num_ims_per_class):
     return history
 
 data_result = []
-
-for i in range(20, 40, 2):
-    num_epochs = 20
+USE_BN = True
+for i in range(20, 102, 1):
+    num_epochs = 50
     history = train(Inception_ResNetv2(
-        use_bn=True,#False
+        use_bn=USE_BN,
         classes=2
     ), num_epochs, i)  # more epochs without BN is required to get to overfit
     # breakpoint()
@@ -304,7 +304,8 @@ def mkdirs(s):
     if not os.path.exists(s):
         os.makedirs(s)
 import time
-fold = f'data_result/pytorch_{int(time.time())}'
+bn = 'bn' if USE_BN else 'nobn'
+fold = f'data_result/pytorch_{bn}_{int(time.time())}'
 mkdirs(fold)
 with open(f'{fold}/data_result.json', 'w') as f:
     import json
