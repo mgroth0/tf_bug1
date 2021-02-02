@@ -290,8 +290,10 @@ data_result = []
 
 for i in range(20, 40, 2):
     num_epochs = 20
-    history = train(Inception_ResNetv2(use_bn=False, classes=2), num_epochs,
-                    i)  # more epochs without BN is required to get to overfit
+    history = train(Inception_ResNetv2(
+        use_bn=True,#False
+        classes=2
+    ), num_epochs, i)  # more epochs without BN is required to get to overfit
     # breakpoint()
     data_result.append({
         'num_images': i,
