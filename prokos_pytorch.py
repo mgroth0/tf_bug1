@@ -12,11 +12,11 @@ import torchnet as tnt
 
 import random
 import os
-import matplotlib.image as mpimg
-import cv2
-import tensorflow as tf
+# import matplotlib.image as mpimg
+# import cv2
+# import tensorflow as tf
 
-from mlib.boot.mlog import err
+# from mlib.boot.mlog import err
 from tf_bug1.zhulf_inc import Inception_ResNetv2
 
 
@@ -28,7 +28,7 @@ BASE_WEIGHT_URL = ('https://storage.googleapis.com/tensorflow/'
                    'keras-applications/inception_resnet_v2/')
 layers = None
 
-err('not pretrained')
+# err('not pretrained')
 
 
 
