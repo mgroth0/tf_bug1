@@ -13,6 +13,9 @@ import cv2
 import tensorflow as tf
 
 # from mlib.boot.mlog import err
+from time import time
+
+time_start = time.time()
 
 
 HEIGHT_WIDTH = 299
@@ -295,7 +298,7 @@ def inception_resnet_block(x, scale, block_type, block_idx, activation='relu'):
     return x
 
 def train(model_class, epochs, num_ims_per_class):
-    print('starting script')
+    print(f'starting script (num_ims_per_class={num_ims_per_class})')
     net = model_class(
         include_top=True,
         weights=None,  # 'imagenet',
@@ -411,8 +414,19 @@ def train(model_class, epochs, num_ims_per_class):
 
 data_result = []
 
+
+def mkdirs(s):
+    if not os.path.exists(s):
+        os.makedirs(s)
+import time
+fold = f'data_result/keras_{int(time.time())}'
+mkdirs(fold)
+
+
 # for i in range(20, 40, 2):
 for i in range(20, 102, 1):
+    time_now = time.time() - time_start
+    print(f'hours elapsed: {(time_now/60/60}')
     num_epochs = 50
     history = train(CustomInceptionResNetV2, num_epochs, i)  # more epochs without BN is required to get to overfit
     # breakpoint()
@@ -421,12 +435,7 @@ for i in range(20, 102, 1):
         'history'   : history.history
     })
     # import pdb; pdb.set_trace()
-def mkdirs(s):
-    if not os.path.exists(s):
-        os.makedirs(s)
-import time
-fold = f'data_result/keras_{int(time.time())}'
-mkdirs(fold)
-with open(f'{fold}/data_result.json', 'w') as f:
-    import json
-    f.write(json.dumps(data_result))
+
+    with open(f'{fold}/data_result.json', 'w') as f:
+        import json
+        f.write(json.dumps(data_result))

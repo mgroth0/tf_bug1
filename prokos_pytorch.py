@@ -288,6 +288,17 @@ def train(model, epochs, num_ims_per_class):
 
 data_result = []
 USE_BN = True
+
+
+def mkdirs(s):
+    if not os.path.exists(s):
+        os.makedirs(s)
+import time
+bn = 'bn' if USE_BN else 'nobn'
+fold = f'data_result/pytorch_{bn}_{int(time.time())}'
+mkdirs(fold)
+
+
 for i in range(20, 102, 1):
     num_epochs = 50
     history = train(Inception_ResNetv2(
@@ -300,13 +311,10 @@ for i in range(20, 102, 1):
         'history'   : history
     })
     # import pdb; pdb.set_trace()
-def mkdirs(s):
-    if not os.path.exists(s):
-        os.makedirs(s)
-import time
-bn = 'bn' if USE_BN else 'nobn'
-fold = f'data_result/pytorch_{bn}_{int(time.time())}'
-mkdirs(fold)
-with open(f'{fold}/data_result.json', 'w') as f:
-    import json
-    f.write(json.dumps(data_result))
+
+    with open(f'{fold}/data_result.json', 'w') as f:
+        import json
+        f.write(json.dumps(data_result))
+
+
+# srun -n 1 --mem=50G --gres=gpu:1 --constraint=any-gpu -t 600 --pty bash
