@@ -13,8 +13,7 @@ import cv2
 import tensorflow as tf
 
 # from mlib.boot.mlog import err
-from time import time
-
+import time
 time_start = time.time()
 
 
