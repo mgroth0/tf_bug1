@@ -1,15 +1,13 @@
-from keras_applications.densenet import DenseNet201
-from keras_applications.resnet_common import ResNet152
 from tensorflow.python.keras import backend
 from tensorflow.python.keras.applications import imagenet_utils
-from tensorflow.python.keras.applications.densenet import DenseNet121, DenseNet169
+from tensorflow.python.keras.applications.densenet import DenseNet121, DenseNet169, DenseNet201
 from tensorflow.python.keras.applications.efficientnet import EfficientNetB5, EfficientNetB7, EfficientNetB6, EfficientNetB4, EfficientNetB3, EfficientNetB2, EfficientNetB1, EfficientNetB0
 from tensorflow.python.keras.applications.inception_resnet_v2 import InceptionResNetV2
 from tensorflow.python.keras.applications.inception_v3 import InceptionV3
 from tensorflow.python.keras.applications.mobilenet import MobileNet
 from tensorflow.python.keras.applications.mobilenet_v2 import MobileNetV2
 from tensorflow.python.keras.applications.nasnet import NASNetMobile, NASNetLarge
-from tensorflow.python.keras.applications.resnet import ResNet50, ResNet101
+from tensorflow.python.keras.applications.resnet import ResNet50, ResNet101, ResNet152
 from tensorflow.python.keras.applications.resnet_v2 import ResNet101V2
 from tensorflow.python.keras.applications.vgg16 import VGG16
 from tensorflow.python.keras.applications.vgg19 import VGG19
