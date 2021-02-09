@@ -292,18 +292,18 @@ mkdirs(fold)
 
 import torchvision.models as models
 models_to_test = {
-    # 'resnet18'       : lambda: models.resnet18(pretrained=True),
-    # 'alexnet'        : lambda: models.alexnet(pretrained=True),
-    # 'squeezenet'     : lambda: models.squeezenet1_0(pretrained=True),
-    # 'vgg16'          : lambda: models.vgg16(pretrained=True),
-    # 'densenet'       : lambda: models.densenet161(pretrained=True),
+    'resnet18'       : lambda: models.resnet18(pretrained=True),
+    'alexnet'        : lambda: models.alexnet(pretrained=True),
+    'squeezenet'     : lambda: models.squeezenet1_0(pretrained=True),
+    'vgg16'          : lambda: models.vgg16(pretrained=True),
+    'densenet'       : lambda: models.densenet161(pretrained=True),
     'inception'      : lambda: models.inception_v3(pretrained=True,aux_logits=False),
-    # 'googlenet'      : lambda: models.googlenet(pretrained=True),
-    # 'shufflenet'     : lambda: models.shufflenet_v2_x1_0(pretrained=True),
-    # 'mobilenet'      : lambda: models.mobilenet_v2(pretrained=True),
-    # 'resnext50_32x4d': lambda: models.resnext50_32x4d(pretrained=True),
-    # 'wide_resnet50_2': lambda: models.wide_resnet50_2(pretrained=True),
-    # 'mnasnet'        : lambda: models.mnasnet1_0(pretrained=True),
+    'googlenet'      : lambda: models.googlenet(pretrained=True),
+    'shufflenet'     : lambda: models.shufflenet_v2_x1_0(pretrained=True),
+    'mobilenet'      : lambda: models.mobilenet_v2(pretrained=True),
+    'resnext50_32x4d': lambda: models.resnext50_32x4d(pretrained=True),
+    'wide_resnet50_2': lambda: models.wide_resnet50_2(pretrained=True),
+    'mnasnet'        : lambda: models.mnasnet1_0(pretrained=True),
 }
 
 # for i in range(20, 102, 1):
