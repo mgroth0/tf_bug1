@@ -311,13 +311,14 @@ def train(model_class, epochs, num_ims_per_class):
     print(f'starting script (num_ims_per_class={num_ims_per_class})')
     net = model_class(
         include_top=True,
-        weights=None,  # 'imagenet',
+        # weights=None,  # 'imagenet',
+        weights='imagenet',  # 'imagenet',
         input_tensor=None,
         input_shape=None,
         pooling=None,
         classes=1,  # 1000,2
         classifier_activation='sigmoid',
-        layers=tf.keras.layers
+        # layers=tf.keras.layers #why???
     )
     net.compile(
         optimizer='adam',
@@ -436,32 +437,32 @@ mkdirs(fold)
 NUM_CLASSES = 1000 #2
 
 models_to_test = {
-    'Xception'         : lambda: Xception(classes=NUM_CLASSES),
-    'VGG16'            : lambda: VGG16(classes=NUM_CLASSES),
-    'VGG19'            : lambda: VGG19(classes=NUM_CLASSES),
-    'ResNet50'         : lambda: ResNet50(classes=NUM_CLASSES),
-    'ResNet101'        : lambda: ResNet101(classes=NUM_CLASSES),
-    'ResNet152'        : lambda: ResNet152(classes=NUM_CLASSES),
+    'Xception'         : lambda: Xception,
+    'VGG16'            : lambda: VGG16,
+    'VGG19'            : lambda: VGG19,
+    'ResNet50'         : lambda: ResNet50,
+    'ResNet101'        : lambda: ResNet101,
+    'ResNet152'        : lambda: ResNet152,
     # 'ResNet50V3'       : lambda: ResNet50V3(classes=NUM_CLASSES),
-    'ResNet101V2'      : lambda: ResNet101V2(classes=1000),
-    # 'ResNet152V3'      : lambda: ResNet152V3(classes=1000),
-    'InceptionV3'      : lambda: InceptionV3(classes=1000),
-    'InceptionResNetV2': lambda: InceptionResNetV2(classes=1000),
-    'MobileNet'        : lambda: MobileNet(classes=1000),
-    'MobileNetV2'      : lambda: MobileNetV2(classes=1000),
-    'DenseNet121'      : lambda: DenseNet121(classes=1000),
-    'DenseNet169'      : lambda: DenseNet169(classes=1000),
-    'DenseNet201'      : lambda: DenseNet201(classes=1000),
-    'NASNetMobile'     : lambda: NASNetMobile(classes=1000),
-    'NASNetLarge'      : lambda: NASNetLarge(classes=1000),
-    'EfficientNetB0'   : lambda: EfficientNetB0(classes=1000),
-    'EfficientNetB1'   : lambda: EfficientNetB1(classes=1000),
-    'EfficientNetB2'   : lambda: EfficientNetB2(classes=1000),
-    'EfficientNetB3'   : lambda: EfficientNetB3(classes=1000),
-    'EfficientNetB4'   : lambda: EfficientNetB4(classes=1000),
-    'EfficientNetB5'   : lambda: EfficientNetB5(classes=1000),
-    'EfficientNetB6'   : lambda: EfficientNetB6(classes=1000),
-    'EfficientNetB7'   : lambda: EfficientNetB7(classes=1000),
+    'ResNet101V2'      : lambda: ResNet101V2,
+    # 'ResNet152V3'      : lambda: ResNet152V3,
+    'InceptionV3'      : lambda: InceptionV3,
+    'InceptionResNetV2': lambda: InceptionResNetV2,
+    'MobileNet'        : lambda: MobileNet,
+    'MobileNetV2'      : lambda: MobileNetV2,
+    'DenseNet121'      : lambda: DenseNet121,
+    'DenseNet169'      : lambda: DenseNet169,
+    'DenseNet201'      : lambda: DenseNet201,
+    'NASNetMobile'     : lambda: NASNetMobile,
+    'NASNetLarge'      : lambda: NASNetLarge,
+    'EfficientNetB0'   : lambda: EfficientNetB0,
+    'EfficientNetB1'   : lambda: EfficientNetB1,
+    'EfficientNetB2'   : lambda: EfficientNetB2,
+    'EfficientNetB3'   : lambda: EfficientNetB3,
+    'EfficientNetB4'   : lambda: EfficientNetB4,
+    'EfficientNetB5'   : lambda: EfficientNetB5,
+    'EfficientNetB6'   : lambda: EfficientNetB6,
+    'EfficientNetB7'   : lambda: EfficientNetB7,
 }
 
 # for i in range(20, 40, 2):
