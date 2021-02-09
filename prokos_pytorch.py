@@ -308,7 +308,8 @@ models_to_test = {
 
 # for i in range(20, 102, 1):
 for name,model in list(models_to_test.items()):
-    num_epochs = 10
+    # num_epochs = 10
+    num_epochs = 50
     num_ims = 100
 
     # inc = Inception_ResNetv2(
