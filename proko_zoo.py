@@ -310,14 +310,16 @@ def inception_resnet_block(x, scale, block_type, block_idx, activation='relu'):
 def train(model_class, epochs, num_ims_per_class):
     print(f'starting script (num_ims_per_class={num_ims_per_class})')
     net = model_class(
+        # include_top=False,
         include_top=True,
         # weights=None,  # 'imagenet',
         weights='imagenet',  # 'imagenet',
         input_tensor=None,
         input_shape=None,
         pooling=None,
-        classes=1,  # 1000,2
-        classifier_activation='sigmoid',
+        classes=1000,
+        # classes=1,  # 1000,2
+        # classifier_activation='sigmoid',
         # layers=tf.keras.layers #why???
     )
     net.compile(
@@ -434,7 +436,7 @@ import time
 fold = f'data_result/keras_zoo_{int(time.time())}'
 mkdirs(fold)
 
-NUM_CLASSES = 1000 #2
+# NUM_CLASSES = 1000 #2
 
 models_to_test = {
     'Xception'         : lambda: Xception,
