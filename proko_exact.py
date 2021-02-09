@@ -423,7 +423,9 @@ mkdirs(fold)
 
 
 # for i in range(20, 40, 2):
-for i in range(20, 102, 1):
+
+# for i in range(20, 102, 1):
+for i in range(86, 102, 1):
     time_now = time.time() - time_start
     print(f'hours elapsed: {(time_now/60)/60}')
     num_epochs = 50
