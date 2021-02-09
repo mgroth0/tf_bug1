@@ -1,16 +1,19 @@
-from keras_applications.densenet import DenseNet201, DenseNet169, DenseNet121
-from keras_applications.inception_resnet_v2 import InceptionResNetV2
-from keras_applications.inception_v3 import InceptionV3
-from keras_applications.mobilenet import MobileNet
-from keras_applications.mobilenet_v2 import MobileNetV2
-from keras_applications.nasnet import NASNetLarge, NASNetMobile
-from keras_applications.resnet_common import ResNet101V2, ResNet152, ResNet101, ResNet50
-from keras_applications.vgg16 import VGG16
-from keras_applications.vgg19 import VGG19
-from keras_applications.xception import Xception
+from keras_applications.densenet import DenseNet201
+from keras_applications.resnet_common import ResNet152
 from tensorflow.python.keras import backend
 from tensorflow.python.keras.applications import imagenet_utils
+from tensorflow.python.keras.applications.densenet import DenseNet121, DenseNet169
 from tensorflow.python.keras.applications.efficientnet import EfficientNetB5, EfficientNetB7, EfficientNetB6, EfficientNetB4, EfficientNetB3, EfficientNetB2, EfficientNetB1, EfficientNetB0
+from tensorflow.python.keras.applications.inception_resnet_v2 import InceptionResNetV2
+from tensorflow.python.keras.applications.inception_v3 import InceptionV3
+from tensorflow.python.keras.applications.mobilenet import MobileNet
+from tensorflow.python.keras.applications.mobilenet_v2 import MobileNetV2
+from tensorflow.python.keras.applications.nasnet import NASNetMobile, NASNetLarge
+from tensorflow.python.keras.applications.resnet import ResNet50, ResNet101
+from tensorflow.python.keras.applications.resnet_v2 import ResNet101V2
+from tensorflow.python.keras.applications.vgg16 import VGG16
+from tensorflow.python.keras.applications.vgg19 import VGG19
+from tensorflow.python.keras.applications.xception import Xception
 from tensorflow.python.keras.engine import training
 # from tensorflow.python.keras.layers import VersionAwareLayers
 from tensorflow.python.keras.utils import data_utils
@@ -439,9 +442,9 @@ models_to_test = {
     'ResNet50'         : lambda: ResNet50(classes=2),
     'ResNet101'        : lambda: ResNet101(classes=2),
     'ResNet152'        : lambda: ResNet152(classes=2),
-    'ResNet50V3'       : lambda: ResNet50V3(classes=2),
+    # 'ResNet50V3'       : lambda: ResNet50V3(classes=2),
     'ResNet101V2'      : lambda: ResNet101V2(classes=2),
-    'ResNet152V3'      : lambda: ResNet152V3(classes=2),
+    # 'ResNet152V3'      : lambda: ResNet152V3(classes=2),
     'InceptionV3'      : lambda: InceptionV3(classes=2),
     'InceptionResNetV2': lambda: InceptionResNetV2(classes=2),
     'MobileNet'        : lambda: MobileNet(classes=2),
