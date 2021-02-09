@@ -311,15 +311,15 @@ def train(model_class, epochs, num_ims_per_class):
     print(f'starting script (num_ims_per_class={num_ims_per_class})')
     net = model_class(
         # include_top=False,
-        include_top=True,
+        include_top=False,
         # weights=None,  # 'imagenet',
         weights='imagenet',  # 'imagenet',
-        input_tensor=None,
-        input_shape=None,
-        pooling=None,
-        classes=1000,
+        # input_tensor=None,
+        # input_shape=None,
+        # pooling=None,
+        classes=1,
         # classes=1,  # 1000,2
-        # classifier_activation='sigmoid',
+        classifier_activation='sigmoid',
         # layers=tf.keras.layers #why???
     )
     net.compile(
