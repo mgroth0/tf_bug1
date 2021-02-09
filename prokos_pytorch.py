@@ -31,7 +31,6 @@ layers = None
 # err('not pretrained')
 
 
-
 def train(model, epochs, num_ims_per_class):
     print('starting script')
 
@@ -76,7 +75,7 @@ def train(model, epochs, num_ims_per_class):
             # self.validation_synset_labels = self.get_label()
             # self.synset2label = self.synset2label()
 
-        def transform(self,img):
+        def transform(self, img):
             tfs = []
             tfs.append(transforms.Resize(int(math.floor(max(self.input_size) / self.scale))))
             tfs.append(transforms.CenterCrop(max(self.input_size)))
@@ -86,8 +85,7 @@ def train(model, epochs, num_ims_per_class):
             return tf
 
 
-        def preprocess(self,file):
-
+        def preprocess(self, file):
             # filename = self.filenames[idx]
             img = Image.open(file).convert(self.space)
             transforms = self.transform(img)
@@ -145,8 +143,6 @@ def train(model, epochs, num_ims_per_class):
     random.shuffle(train_data)
     random.shuffle(test_data)
 
-
-
     # DEBUG
     # test_data = train_data
 
@@ -166,7 +162,6 @@ def train(model, epochs, num_ims_per_class):
         batch_size=BATCH_SIZE,
         num_workers=4
     )  # create your dataloader
-
 
     # def get_gen(data):
     #     def gen():
@@ -208,7 +203,6 @@ def train(model, epochs, num_ims_per_class):
     model.cuda()
     loss_function.cuda()
 
-
     print(f'starting training (num ims per class = {num_ims_per_class})')
     # history = net.fit(
     #     get_ds(train_data),
@@ -219,10 +213,10 @@ def train(model, epochs, num_ims_per_class):
     #     validation_data=get_ds(train_data)
     # )
 
-    history = {'loss':[],'accuracy':[],'val_loss':[],'val_accuracy':[]}
+    history = {'loss': [], 'accuracy': [], 'val_loss': [], 'val_accuracy': []}
 
     model.train()
-    for epoch in range (1,num_epochs+1):
+    for epoch in range(1, num_epochs + 1):
         epoch_loss = []
         top1 = tnt.meter.ClassErrorMeter()
         for batch_ix, (data, target) in enumerate(train_loader):
@@ -249,7 +243,6 @@ def train(model, epochs, num_ims_per_class):
         history['loss'].append(mean(epoch_loss))
         history['accuracy'].append(top1.value()[0])
 
-
         print(f'eval on epoch {epoch}')
         model.eval()
         test_loss = tnt.meter.AverageValueMeter()
@@ -270,9 +263,6 @@ def train(model, epochs, num_ims_per_class):
         history['val_loss'].append(test_loss.value()[0])
         history['val_accuracy'].append(top1.value()[0])
 
-
-
-
     # print('starting testing')
     # print_output = True
     # print(net.evaluate(
@@ -281,8 +271,6 @@ def train(model, epochs, num_ims_per_class):
     #     use_multiprocessing=False
     # ))
     print('script complete')
-
-
 
     return history
 
@@ -294,20 +282,55 @@ def mkdirs(s):
     if not os.path.exists(s):
         os.makedirs(s)
 import time
-bn = 'bn' if USE_BN else 'nobn'
-fold = f'data_result/pytorch_{bn}_{int(time.time())}'
+
+
+
+# bn = 'bn' if USE_BN else 'nobn'
+# fold = f'data_result/pytorch_{bn}_{int(time.time())}'
+fold = f'data_result/pytorch_zoo_{int(time.time())}'
 mkdirs(fold)
 
+import torchvision.models as models
+models_to_test = {
+    'resnet18'       : lambda: models.resnet18(pretrained=True),
+    'alexnet'        : lambda: models.alexnet(pretrained=True),
+    'squeezenet'     : lambda: models.squeezenet1_0(pretrained=True),
+    'vgg16'          : lambda: models.vgg16(pretrained=True),
+    'densenet'       : lambda: models.densenet161(pretrained=True),
+    'inception'      : lambda: models.inception_v3(pretrained=True),
+    'googlenet'      : lambda: models.googlenet(pretrained=True),
+    'shufflenet'     : lambda: models.shufflenet_v2_x1_0(pretrained=True),
+    'mobilenet'      : lambda: models.mobilenet_v2(pretrained=True),
+    'resnext50_32x4d': lambda: models.resnext50_32x4d(pretrained=True),
+    'wide_resnet50_2': lambda: models.wide_resnet50_2(pretrained=True),
+    'mnasnet'        : lambda: models.mnasnet1_0(pretrained=True),
+}
 
-for i in range(20, 102, 1):
-    num_epochs = 50
-    history = train(Inception_ResNetv2(
-        use_bn=USE_BN,
-        classes=2
-    ), num_epochs, i)  # more epochs without BN is required to get to overfit
+# for i in range(20, 102, 1):
+for name,model in list(models_to_test.items()):
+    num_epochs = 10
+    num_ims = 100
+
+    # inc = Inception_ResNetv2(
+    #     use_bn=USE_BN,
+    #     classes=2
+    # )
+
+    history = train(model(), num_epochs,num_ims)  # more epochs without BN is required to get to overfit
     # breakpoint()
+
+
+
+
+
+
+
+
+
+
     data_result.append({
-        'num_images': i,
+        'model_name':name,
+        'num_images': num_ims,
         'history'   : history
     })
     # import pdb; pdb.set_trace()
